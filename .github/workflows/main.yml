@@ -13,8 +13,7 @@ jobs:
       #      run: docker build . -t hs0907j/serving
 
     - name: login
-      echo $PASSWORD
-      run: docker login --username hs0907j --password $PASSWORD!@
+      run: docker login --username hs0907j --password-stdin
 
     - name: push
       run: docker push hs0907j/serving
