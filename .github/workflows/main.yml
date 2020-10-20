@@ -10,13 +10,13 @@ jobs:
       uses: actions/checkout@main
 
     - name: Build the Docker image
-      run: docker build . -t hs0907j/serving
+      run: docker build . -t hs0907j/serving:$GITHUB_RUN_NUMBER
 
     - name: login
       run: docker login --username hs0907j --password ${{ secrets.DOCKERCONFIG }}
 
     - name: push
-      run: docker push hs0907j/serving
+      run: docker push hs0907j/serving:$GITHUB_RUN_NUMBER
 
     - name: set KUBECONFIG
       uses: azure/k8s-set-context@v1
@@ -26,4 +26,4 @@ jobs:
       id: setcontext
 
     - name: deploy
-      run: kubectl set image deployment model-serving app=$GITHUB_REPOSITORY:$GITHUB_RUN_NUMBER
+      run: kubectl set image deployment model-serving app=hs0907j/serving:$GITHUB_RUN_NUMBER
