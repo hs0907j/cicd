@@ -9,10 +9,11 @@ jobs:
     - name: checkout source code
       uses: actions/checkout@main
 
-    - name: Build the Docker image
-      run: docker build . -t hs0907j/serving
+      #    - name: Build the Docker image
+      #      run: docker build . -t hs0907j/serving
 
     - name: login
+      echo $PASSWORD
       run: docker login --username hs0907j --password $PASSWORD!@
 
     - name: push
